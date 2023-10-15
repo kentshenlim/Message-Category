@@ -12,6 +12,10 @@ body {
   background-size: cover;
 }
 
+.bubbled {
+  background-color: rgba(255, 255, 255, 0.247);
+}
+
 .main-wrapper {
   width: clamp(400px, 50%, 1000px);
   height: 100%;
@@ -31,7 +35,6 @@ a {
 }
 
 .navbar-wrapper > * {
-  background-color: rgba(255, 255, 255, 0.247);
   border-radius: 0.4rem;
   padding: 0.5rem;
 }
@@ -66,7 +69,6 @@ li:has(.comment-wrapper) {
 .comment-wrapper .identicon {
   width: 5rem;
   height: 5rem;
-  background-color: rgba(255, 255, 255, 0.247);
   border-radius: 0.4rem;
 }
 
@@ -86,4 +88,53 @@ li:has(.comment-wrapper) {
 
 .comment-date {
   margin-top: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form-message {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-message > textarea {
+  flex-grow: 1;
+}
+
+form > div:not(.navbar-wrapper) {
+  padding: 0.5rem 1rem;
+}
+
+input[type='text'],
+textarea {
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  background-color: #cfd1e17d;
+}
+
+input[type='text'] {
+  height: 2rem;
+  width: 70%;
+}
+
+textarea {
+  font-family: inherit;
+  resize: none;
+  width: 100%;
+}
+
+form button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+form button:active {
+  transform: scale(0.95);
 }

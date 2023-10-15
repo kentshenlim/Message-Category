@@ -3,14 +3,14 @@ extends layout
 block content
   div(class="main-wrapper")
     div(class="navbar-wrapper")
-      h1= title
-      a(href="/new")
+      h1(class="bubbled")= title
+      a(href="/new" class="bubbled")
         img(src="/images/plus-circle.svg" alt="Plus icon")
     ul 
       each obj in msgArr
         li 
           div(class="comment-wrapper")
-            div(class="identicon")
+            div(class="identicon bubbled")
               != obj.img
             div(class="comment-details")
               h2 #{obj.user}

@@ -4,14 +4,18 @@ block content
     div(class="main-wrapper")
         form(method="POST" action="/new")
             div(class="navbar-wrapper")
-                h1 Submit a Message
-                a(href="/")
+                h1(class="bubbled") Submit a Message
+                a(href="/" class="bubbled")
                     img(src="/images/home.svg" alt="Home icon")
 
             div 
-                label(for="name") Name
-                input(type="text" id="name" name="name")
-            div 
-                label(for="message") Message
-                textarea(id="message" name="message")
-            button Submit
+                label(for="name")
+                    h2 Name (&lt; 100 characters)
+                input(type="text" id="name" name="name" maxlength="100" required)
+            div(class="form-message")
+                label(for="message")
+                    h2 Message (&lt; 500 characters)
+                textarea(id="message" name="message" maxlength="500" required)
+            div
+                button(class="bubbled")
+                    h2 Submit
