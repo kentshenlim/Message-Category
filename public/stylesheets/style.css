@@ -22,6 +22,8 @@ body {
   margin: 0 auto;
   padding: 0.75rem 1rem;
   background-color: #a1b6c769;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -53,6 +55,7 @@ a {
 
 ul:has(.comment-wrapper) {
   padding-left: 0;
+  overflow-y: auto;
 }
 
 li:has(.comment-wrapper) {
