@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class="main-wrapper")
+    h1= title
+    ul 
+      each obj in msgArr
+        li 
+          div(class="comment-wrapper")
+            div(class="identicon")
+              != obj.img
+            div(class="comment-details")
+              h2 #{obj.user}
+              p #{obj.text}
+              p(class='comment-date') #{obj.added}
