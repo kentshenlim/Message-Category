@@ -69,10 +69,19 @@ li:has(.comment-wrapper) {
   gap: 0.75rem;
 }
 
+.comment-wrapper .comment-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to three lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .comment-wrapper .identicon {
   width: 5rem;
   height: 5rem;
   border-radius: 0.4rem;
+  flex-shrink: 0;
 }
 
 .identicon svg {
