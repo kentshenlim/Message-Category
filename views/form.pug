@@ -1,0 +1,17 @@
+extends layout
+
+block content 
+    div(class="main-wrapper")
+        form(method="POST" action="/new")
+            div(class="navbar-wrapper")
+                h1 Submit a Message
+                a(href="/")
+                    img(src="/images/home.svg" alt="Home icon")
+
+            div 
+                label(for="name") Name
+                input(type="text" id="name" name="name")
+            div 
+                label(for="message") Message
+                textarea(id="message" name="message")
+            button Submit

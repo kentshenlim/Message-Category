@@ -2,7 +2,10 @@ extends layout
 
 block content
   div(class="main-wrapper")
-    h1= title
+    div(class="navbar-wrapper")
+      h1= title
+      a(href="/new")
+        img(src="/images/plus-circle.svg" alt="Plus icon")
     ul 
       each obj in msgArr
         li 

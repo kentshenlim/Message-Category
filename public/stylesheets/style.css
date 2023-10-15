@@ -1,14 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+  background-image: url('/images/background.png');
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  background-size: cover;
 }
 
 .main-wrapper {
-  width: 50%;
+  width: clamp(400px, 50%, 1000px);
+  height: 100%;
   margin: 0 auto;
+  padding: 0.75rem 1rem;
+  background-color: #a1b6c769;
 }
 
 a {
   color: #00b7ff;
+}
+
+.navbar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-wrapper > * {
+  background-color: rgba(255, 255, 255, 0.247);
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+}
+
+.navbar-wrapper > a {
+  height: 3rem;
+  width: 3rem;
+}
+.navbar-wrapper > a:active {
+  transform: scale(0.95);
+}
+
+.navbar-wrapper > a > img {
+  height: 100%;
 }
 
 ul:has(.comment-wrapper) {
@@ -17,11 +54,10 @@ ul:has(.comment-wrapper) {
 
 li:has(.comment-wrapper) {
   list-style: none;
-  margin-top: 0.1rem;
+  border-bottom: solid #5f4b7324 2px;
 }
 
 .comment-wrapper {
-  border: solid black 3px;
   padding: 0.5rem 1rem;
   display: flex;
   gap: 0.75rem;
@@ -30,6 +66,8 @@ li:has(.comment-wrapper) {
 .comment-wrapper .identicon {
   width: 5rem;
   height: 5rem;
+  background-color: rgba(255, 255, 255, 0.247);
+  border-radius: 0.4rem;
 }
 
 .identicon svg {
