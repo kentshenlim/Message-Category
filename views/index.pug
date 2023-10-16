@@ -16,3 +16,8 @@ block content
               h2 #{obj.user}
               p(class="comment-text") #{obj.text}
               p(class="comment-date") #{obj.displayDate}
+    div(class="page-navigator")
+      a(href=`/?pageIdx=${Math.max(pageIdx - 1, 0)}` class=`bubbled${pageIdx == 0 ? " disabled" : ""}`)
+        img(src="/images/arrow-left-circle.svg" alt="Previous icon")
+      a(href=`/?pageIdx=${pageIdx + 1}` class=`bubbled${pageIdx == maxPageIdx ? " disabled" : ""}`)
+        img(src="/images/arrow-right-circle.svg" alt="Next icon" disabled="true")

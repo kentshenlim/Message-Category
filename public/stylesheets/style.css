@@ -36,20 +36,24 @@ a {
   justify-content: space-between;
 }
 
-.navbar-wrapper > * {
+.navbar-wrapper > *,
+.page-navigator > a {
   border-radius: 0.4rem;
   padding: 0.5rem;
 }
 
-.navbar-wrapper > a {
+.navbar-wrapper > a,
+.page-navigator > a {
   height: 3rem;
   width: 3rem;
 }
-.navbar-wrapper > a:active {
+.navbar-wrapper > a:active,
+.page-navigator > a:active {
   transform: scale(0.95);
 }
 
-.navbar-wrapper > a > img {
+.navbar-wrapper > a > img,
+.page-navigator > a > img {
   height: 100%;
 }
 
@@ -149,4 +153,15 @@ form button {
 }
 form button:active {
   transform: scale(0.95);
+}
+
+div.page-navigator {
+  display: flex;
+  justify-content: space-between;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  visibility: hidden;
 }
