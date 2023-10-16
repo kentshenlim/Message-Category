@@ -3,10 +3,33 @@ const GeneralModel = require('../models/general');
 
 const router = express.Router();
 
+/* Aggregation pipeline for pagination */
+const maxResPerPage = 10;
+function getAgg(pageIdx) {
+  const agg = [
+    { $match: {} },
+    { $sort: { added: -1 } },
+    { $skip: maxResPerPage * pageIdx },
+    { $limit: maxResPerPage },
+  ];
+  return agg;
+}
+
 /* GET home page. */
 router.get('/', async (req, res, next) => {
-  const msgArr = await GeneralModel.find().sort({ added: -1 }).limit(10);
-  res.render('index', { title: 'Mini Messageboard', msgArr });
+  let { pageIdx } = req.query;
+  if (!pageIdx) pageIdx = 0;
+  pageIdx = +pageIdx;
+  const totalDocCount = await GeneralModel.countDocuments();
+  const maxPageIdx = Math.floor(totalDocCount / maxResPerPage);
+  if (pageIdx > maxPageIdx) res.redirect(`/?pageIdx=${maxPageIdx}`);
+  const msgArrDehydrated = await GeneralModel.aggregate(getAgg(pageIdx));
+  // Need to hydrate if using aggregation, to add back defined virtuals
+  // Otherwise, specify virtuals during aggregation rather than in schema
+  // Here the first approach was used because virtuals have been defined in schema
+  // See https://github.com/Automattic/mongoose/issues/8345#issuecomment-554647197
+  const msgArrHydrated = msgArrDehydrated.map((doc) => GeneralModel.hydrate(doc));
+  res.render('index', { title: 'Mini Messageboard', msgArr: msgArrHydrated });
 });
 
 router.post('/new', async (req, res, next) => {
