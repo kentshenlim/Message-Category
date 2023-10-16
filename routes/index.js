@@ -1,34 +1,19 @@
 const express = require('express');
+const GeneralModel = require('../models/general');
 
 const router = express.Router();
 
-const jdenticon = require('jdenticon');
-
-const messages = [
-  {
-    text: 'Hi there',
-    user: 'Amando',
-    added: new Date(),
-    img: jdenticon.toSvg('Amando', 200),
-  },
-  {
-    text: 'Hello World!',
-    user: 'Charles',
-    added: new Date(),
-    img: jdenticon.toSvg('Charles', 200),
-  },
-];
-
 /* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Mini Messageboard', msgArr: messages });
+router.get('/', async (req, res, next) => {
+  const msgArr = await GeneralModel.find();
+  res.render('index', { title: 'Mini Messageboard', msgArr });
 });
 
-router.post('/new', (req, res, next) => {
+router.post('/new', async (req, res, next) => {
   const formData = req.body;
   const { message: text, name: user } = formData;
-  messages.push({
-    text, user, added: new Date(), img: jdenticon.toSvg(user, 200),
+  await GeneralModel.create({
+    text, user, added: new Date(),
   });
   res.redirect('/');
 });

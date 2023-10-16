@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -19,6 +21,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// env var setup
+app.use((req, res, next) => {
+  dotenv.config();
+  next();
+});
+
+// Database setup
+app.use((req, res, next) => {
+  const mongoDB = process.env.MONGODB_CONNECTION_STRING;
+  mongoose.connect(mongoDB);
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
