@@ -5,7 +5,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
-  const msgArr = await GeneralModel.find();
+  const msgArr = await GeneralModel.find().sort({ added: -1 }).limit(10);
   res.render('index', { title: 'Mini Messageboard', msgArr });
 });
 

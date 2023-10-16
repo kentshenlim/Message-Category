@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const jdenticon = require('jdenticon');
+const formatDistanceToNow = require('date-fns/formatDistanceToNow');
 
 const { Schema } = mongoose;
 
@@ -11,6 +12,11 @@ const GeneralSchema = new Schema({
 
 GeneralSchema.virtual('jdenticon').get(function () {
   return jdenticon.toSvg(this.user, 200);
+});
+
+GeneralSchema.virtual('displayDate').get(function () {
+  const disp = formatDistanceToNow(this.added);
+  return `${disp[0].toUpperCase() + disp.slice(1)} ago`;
 });
 
 module.exports = mongoose.model('General', GeneralSchema);
