@@ -21,4 +21,4 @@ Leave a kind message for someone else.
 
 ## TODO
 
-- TODO: pagination, need DB
+- TODO: catalog (message expendable)
