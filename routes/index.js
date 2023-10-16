@@ -20,9 +20,12 @@ router.get('/', async (req, res, next) => {
   let { pageIdx } = req.query;
   if (!pageIdx) pageIdx = 0;
   pageIdx = +pageIdx;
+  if (Number.isNaN(pageIdx)) pageIdx = -1; // Mark as invalid
   const totalDocCount = await GeneralModel.countDocuments();
   const maxPageIdx = Math.floor((totalDocCount - 1) / maxResPerPage);
-  if (pageIdx > maxPageIdx) res.redirect(`/?pageIdx=${maxPageIdx}`); // If user sets high pageIdx in URL
+  const refinedPageIdx = Math.max(Math.min(pageIdx, maxPageIdx), 0);
+  if (refinedPageIdx !== pageIdx) res.redirect(`/?pageIdx=${refinedPageIdx}`); // If user sets high pageIdx in URL
+  pageIdx = refinedPageIdx;
   const msgArrDehydrated = await GeneralModel.aggregate(getAgg(pageIdx));
   // Need to hydrate if using aggregation, to add back defined virtuals
   // Otherwise, specify virtuals during aggregation rather than in schema
