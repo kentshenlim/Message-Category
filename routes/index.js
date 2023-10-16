@@ -24,7 +24,7 @@ router.get('/', async (req, res, next) => {
   const totalDocCount = await GeneralModel.countDocuments();
   const maxPageIdx = Math.floor((totalDocCount - 1) / maxResPerPage);
   const refinedPageIdx = Math.max(Math.min(pageIdx, maxPageIdx), 0);
-  if (refinedPageIdx !== pageIdx) res.redirect(`/?pageIdx=${refinedPageIdx}`); // If user sets high pageIdx in URL
+  if (refinedPageIdx !== pageIdx) return res.redirect(`/?pageIdx=${refinedPageIdx}`); // If user sets high pageIdx in URL
   pageIdx = refinedPageIdx;
   const msgArrDehydrated = await GeneralModel.aggregate(getAgg(pageIdx));
   // Need to hydrate if using aggregation, to add back defined virtuals
@@ -32,7 +32,7 @@ router.get('/', async (req, res, next) => {
   // Here the first approach was used because virtuals have been defined in schema
   // See https://github.com/Automattic/mongoose/issues/8345#issuecomment-554647197
   const msgArrHydrated = msgArrDehydrated.map((doc) => GeneralModel.hydrate(doc));
-  res.render('index', {
+  return res.render('index', {
     title: 'Mini Messageboard', msgArr: msgArrHydrated, pageIdx, maxPageIdx,
   });
 });
