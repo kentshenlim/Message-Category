@@ -18,7 +18,3 @@ Leave a kind message for someone else.
 - Express.js
 - Pug
 - MongoDB (using Mongoose)
-
-## TODO
-
-- TODO: catalog (message expendable)
