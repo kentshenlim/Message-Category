@@ -1,4 +1,5 @@
 const express = require('express');
+const asyncHandler = require('express-async-handler');
 const GeneralModel = require('../models/general');
 
 const router = express.Router();
@@ -16,7 +17,7 @@ function getAgg(pageIdx) {
 }
 
 /* GET home page. */
-router.get('/', async (req, res, next) => {
+router.get('/', asyncHandler(async (req, res, next) => {
   let { pageIdx } = req.query;
   if (!pageIdx) pageIdx = 0;
   pageIdx = +pageIdx;
@@ -35,15 +36,15 @@ router.get('/', async (req, res, next) => {
   return res.render('index', {
     title: 'Mini Messageboard', msgArr: msgArrHydrated, pageIdx, maxPageIdx,
   });
-});
+}));
 
-router.post('/new', async (req, res, next) => {
+router.post('/new', asyncHandler(async (req, res, next) => {
   const formData = req.body;
   const { message: text, name: user } = formData;
   await GeneralModel.create({
     text, user, added: new Date(),
   });
   res.redirect('/');
-});
+}));
 
 module.exports = router;
