@@ -10,6 +10,7 @@ body {
   background-repeat: no-repeat;
   background-position: 0 center;
   background-size: cover;
+  display: flex;
 }
 
 .bubbled {
@@ -17,7 +18,9 @@ body {
 }
 
 .main-wrapper {
-  width: clamp(400px, 50%, 1000px);
+  width: 50%;
+  min-width: 400px;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto;
   padding: 0.75rem 1rem;
