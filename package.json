@@ -8,11 +8,14 @@
     "dev": "set DEBUG=Message-Category:* & npm run devStart"
   },
   "dependencies": {
+    "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "date-fns": "^2.30.0",
     "debug": "~2.6.9",
     "dotenv": "^16.3.1",
     "express": "~4.16.1",
+    "express-rate-limit": "^7.1.2",
+    "helmet": "^7.0.0",
     "http-errors": "~1.6.3",
     "jdenticon": "^3.2.0",
     "mongoose": "^7.6.2",

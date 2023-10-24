@@ -5,12 +5,28 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const compression = require('compression');
+const helmet = require('helmet');
+const RateLimit = require('express-rate-limit');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const formRouter = require('./routes/form');
 
 const app = express();
+
+// Enable compression
+app.use(compression());
+
+// Enable helmet
+app.use(helmet());
+
+// Set up rate limiter: 20 requests per minute
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 20,
+});
+app.use(limiter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
